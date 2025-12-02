@@ -1,15 +1,15 @@
-import { ScrapeConfig, type ScrapeResult, ScrapflyClient } from "scrapfly-sdk";
+import { ScrapeConfig, type ScrapeResult, ScrapflyClient } from "scrapfly-sdk"
 
-import { env } from "@/env";
+import { env } from "@/env"
 
-const key = env.SCRAPFLY;
+const key = env.SCRAPFLY
 
-const client = new ScrapflyClient({ key });
+const client = new ScrapflyClient({ key })
 const result: ScrapeResult = await client.scrape(
 	new ScrapeConfig({
 		url: "https://web-scraping.dev/product/1",
-	}),
-);
+	})
+)
 // const apiResponse = await client.scrape(
 // 	new ScrapeConfig({
 // 		url: "https://web-scraping.dev/product/1",
@@ -34,4 +34,4 @@ console.log({
 	price: result.selector(".price>span").text(),
 	"price-full": result.selector(".product-price-full").text(),
 	description: result.selector(".product-description").text(),
-});
+})

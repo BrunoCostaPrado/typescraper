@@ -45,7 +45,10 @@
 			"enabled": true
 		},
 		"formatter": {
-			"enabled": true
+			"enabled": true,
+			"quoteStyle": "double",
+			"semicolons": "asNeeded",
+			"trailingCommas": "es5"
 		},
 		"linter": {
 			"enabled": true
