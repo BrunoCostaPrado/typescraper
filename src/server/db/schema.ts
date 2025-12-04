@@ -29,7 +29,6 @@ export const posts = createTable(
 export const history = createTable("history", (d) => ({
 	id: d.integer({ mode: "number" }).primaryKey({ autoIncrement: true }),
 	url: d.text(),
-	window: d.text({ length: 256 }),
 	createdAt: d
 		.integer({ mode: "timestamp" })
 		.default(sql`(unixepoch())`)

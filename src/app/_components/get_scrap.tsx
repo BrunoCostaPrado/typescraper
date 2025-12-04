@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import { ScrapeComponent } from "@/components/scrape-component"
+import { Input } from "@/components/ui/input"
 import { api } from "@/trpc/react"
 
 export function GetScrap() {
@@ -8,6 +10,8 @@ export function GetScrap() {
 
 	const utils = api.useUtils()
 	const [history, setHistory] = useState("")
+	const [urlToScrape, setUrlToScrape] = useState<string | null>(null)
+
 	const createHistory = api.scrap.create.useMutation({
 		onSuccess: async () => {
 			await utils.post.invalidate()
@@ -27,12 +31,13 @@ export function GetScrap() {
 				onSubmit={(e) => {
 					e.preventDefault()
 					createHistory.mutate({ name: history })
+					setUrlToScrape(history)
 				}}
 			>
-				<input
+				<Input
 					className="w-full rounded-full bg-white/10 px-4 py-2 text-white"
 					onChange={(e) => setHistory(e.target.value)}
-					placeholder="Title"
+					placeholder="URL"
 					type="text"
 					value={history}
 				/>
@@ -44,6 +49,12 @@ export function GetScrap() {
 					{createHistory.isPending ? "Submitting..." : "Submit"}
 				</button>
 			</form>
+
+			{urlToScrape && (
+				<div className="mt-4">
+					<ScrapeComponent url={{ url: urlToScrape }} />
+				</div>
+			)}
 		</div>
 	)
 }
