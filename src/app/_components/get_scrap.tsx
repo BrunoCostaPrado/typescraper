@@ -1,9 +1,9 @@
 "use client"
 
-import { Input } from "@/components/ui/input"
-import { ScrapeComponent } from "@/components/scrape-component"
-import { api } from "@/trpc/react"
 import { useState } from "react"
+import { ScrapeComponent } from "@/components/scrape-component"
+import { Input } from "@/components/ui/input"
+import { api } from "@/trpc/react"
 
 export function GetScrap() {
 	const [fullHistory] = api.scrap.getLatest.useSuspenseQuery()

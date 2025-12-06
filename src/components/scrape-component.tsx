@@ -2,9 +2,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import z from "zod"
-// import { z } from "zod/v4-mini"
+
 import { scrapeUrl } from "@/app/actions/scrape"
+import z from "zod"
 
 // Define the type for the component props
 const ScrapeTypes = z.object({
