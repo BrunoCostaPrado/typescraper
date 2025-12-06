@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
-import { ScrapeComponent } from "@/components/scrape-component"
 import { Input } from "@/components/ui/input"
+import { ScrapeComponent } from "@/components/scrape-component"
 import { api } from "@/trpc/react"
+import { useState } from "react"
 
 export function GetScrap() {
 	const [fullHistory] = api.scrap.getLatest.useSuspenseQuery()
@@ -14,13 +14,13 @@ export function GetScrap() {
 
 	const createHistory = api.scrap.create.useMutation({
 		onSuccess: async () => {
-			await utils.post.invalidate()
+			await utils.scrap.invalidate()
 			setHistory("")
 		},
 	})
 
 	return (
-		<div className="w-full max-w-xs">
+		<div className="w-full max-w-4xl">
 			{fullHistory ? (
 				<p className="truncate">Your most recent history: {fullHistory.url}</p>
 			) : (
@@ -35,7 +35,7 @@ export function GetScrap() {
 				}}
 			>
 				<Input
-					className="w-full rounded-full bg-white/10 px-4 py-2 text-white"
+					className="w-full rounded-full bg-white/10 px-6 py-3 text-white placeholder:text-white/60"
 					onChange={(e) => setHistory(e.target.value)}
 					placeholder="URL"
 					type="text"
